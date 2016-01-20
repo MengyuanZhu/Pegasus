@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<results>
+  <result>
+    <id>4</id>
+    <date>2015-9-23 5:23:12</date>
+    <location>Atlanta</location>
+    <status>Uploading</status>
+    <model>Fluoride Ion</model>
+  </result>
+  <result>
+    <id>5</id>
+    <date>2015-9-12 4:12:12</date>
+    <location>Washington</location>
+    <status>Downloading</status>
+    <model>Fluoride Ion</model>
+  </result>
+  <result>
+    <id>6</id>
+    <date>2015-8-17 14:26:53</date>
+    <location>Salt Lake City</location>
+    <status>Calculating</status>
+    <model>Fluoride Ion</model>
+  </result>
+</results>

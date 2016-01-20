@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="46204mzhu7.PegasusGSU" Publisher="CN=8D4F9C8D-C399-4EDE-B7F9-E1EC56EE7588" Version="1.1.20.0" />
+  <mp:PhoneIdentity PhoneProductId="0c8657a2-e44c-445b-a093-e2dcb903d4cc" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>Pegasus_GSU</DisplayName>
+    <PublisherDisplayName>mzhu7</PublisherDisplayName>
+    <Logo>Assets\StoreLogo-sdk.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10240.0" MaxVersionTested="10.0.10240.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="TitleBar.App" Executable="$targetnametoken$.exe" EntryPoint="Pegasus.App">
+      <uap:VisualElements DisplayName="Pegasus_GSU" Square150x150Logo="Assets\squareTile-sdk.png" Square44x44Logo="Assets\SmallTile-sdk.png" Description="Chemical cocentration tester" BackgroundColor="transparent">
+        <uap:SplashScreen Image="Assets\Splash-sdk.png" BackgroundColor="#6380BC" />
+        <uap:DefaultTile ShortName="Pegasus">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+    <uap:Capability Name="picturesLibrary" />
+    <DeviceCapability Name="microphone" />
+    <DeviceCapability Name="webcam" />
+    <DeviceCapability Name="location" />
+  </Capabilities>
+</Package>

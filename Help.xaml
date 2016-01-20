@@ -1,0 +1,41 @@
+<Page
+    x:Class="SDKTemplate.Help"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="RootGrid" Margin="12,10,12,12">
+            <TextBlock Text="Help &amp; About:" />
+            <StackPanel VerticalAlignment="Top">
+                <TextBlock Margin="0,30,0,0" TextWrapping="Wrap">
+                        <Bold><Run Text="Steps:"/></Bold>
+                        <LineBreak/>
+                    	<Run Text="1. Prepare a sample with our device cassette."/>
+                    	<LineBreak/>
+                    	<Run Text="2. Take a photo by using &quot;New Data&quot; and follow the procedures in &quot;New Data&quot; tab."/>
+                    	<LineBreak/>
+                    	<Run Text="3. Waiting for the result. You can check the current status in &quot;Pending Result&quot;. Once our server finishes the computation work, the result will be returned to your mobile in &quot;Previous Result&quot; tab."/>
+                    	<LineBreak/>
+                        <LineBreak/>                        
+                    	<LineBreak/>
+                        <Bold><Run Text="About"/></Bold>                        
+                        
+                        <LineBreak/>
+                        Developed by Binghe Wang's lab.
+                        <LineBreak/>   
+                        
+                        Contact: <Hyperlink NavigateUri="mailto:wang.gsu.edu">wang@gsu.edu</Hyperlink>.                        
+                        <LineBreak/>
+                        <LineBreak/>
+                        To find more apps developed in our lab, please visit this <Hyperlink NavigateUri="http://lithium.gsu.edu/Groups/Bing_Wang/default.html">website</Hyperlink>.
+                        <LineBreak/>
+                    	<Run/>
+                </TextBlock>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Page>
