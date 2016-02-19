@@ -34,11 +34,8 @@ namespace SDKTemplate
             doc = await XmlDocument.LoadFromFileAsync(storageFile, loadSettings);
             try
             {
-                var results = doc.SelectNodes("descendant::result");
-                
+                var results = doc.SelectNodes("descendant::result");                
                 int num_results = 1;
-                
-
                 foreach (var result in results)
                 {
                     String id = results[num_results - 1].SelectSingleNode("descendant::id").FirstChild.NodeValue.ToString();
@@ -59,9 +56,7 @@ namespace SDKTemplate
 
         #region Data binding
 
-
         private ApplicationViewTitleBar titleBar;
-
         public ApplicationViewTitleBar TitleBar
         {
             get { return titleBar; }

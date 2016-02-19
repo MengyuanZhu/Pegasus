@@ -25,7 +25,6 @@
                        <Bold>Detection Model:</Bold>
                     </TextBlock>
                     <RadioButton x:Name="fluoride" GroupName="model" Checked="fluoride_Checked">Fluoride ion</RadioButton>
-                    <RadioButton x:Name="cyanide" GroupName="model" IsEnabled="False"  >Cyanide ion</RadioButton>
                     <RadioButton x:Name="peroxide" GroupName="model" IsEnabled="False"  >Peroxide</RadioButton>
                 </StackPanel>
             </ScrollViewer>

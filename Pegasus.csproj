@@ -173,6 +173,7 @@
     <Content Include="Assets\squareTile-sdk.png" />
     <Content Include="Assets\squareTile-sdk.scale-100.png" />
     <Content Include="Assets\squareTile-sdk.scale-200.png" />
+    <Content Include="Assets\squareTile-sdk.scale-300.png" />
     <Content Include="Assets\squareTile-sdk.scale-400.png" />
     <Content Include="Assets\StoreLogo-sdk.png" />
     <Content Include="Assets\StoreLogo-sdk.scale-100.png" />

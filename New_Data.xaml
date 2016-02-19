@@ -19,7 +19,7 @@
                     </CaptureElement>
                 </Canvas>
                 <Button  Name="bt_capture" Content="Start" Margin="10,10,10,10" Width="auto" Height="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Click="capture_Click"/>
-
+                <TextBlock Name="geolocation"></TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

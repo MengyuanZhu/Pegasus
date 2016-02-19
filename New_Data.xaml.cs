@@ -14,25 +14,53 @@ using Windows.Devices.Geolocation;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Net.Http;
+using Windows.Data.Json;
 using Windows.UI.Xaml.Media;
+using Windows.Services.Maps;
+using Windows.Devices.Geolocation;
 namespace SDKTemplate
 {
     public sealed partial class New_Data : Page
     {
+
         ApplicationDataContainer roamingSettings = null;
         private CancellationTokenSource _cts = null;
         private MainPage rootPage = MainPage.Current;
         MediaCapture captureManager;
-        string latitude = "null";
-        string longitude = "null";
+        double latitude = 0;
+        double longitude = 0;
         string time = "null";
-
+        
         public New_Data()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
             roamingSettings = ApplicationData.Current.RoamingSettings;
         }
+
+        private async void ReverseGeocode(double latitude, double longtitude)
+        {
+            // Location to reverse geocode.
+            BasicGeoposition location = new BasicGeoposition();
+            location.Latitude = latitude;
+            location.Longitude = longtitude;
+            Geopoint pointToReverseGeocode = new Geopoint(location);
+
+            // Reverse geocode the specified geographic location.
+            MapLocationFinderResult result =
+                await MapLocationFinder.FindLocationsAtAsync(pointToReverseGeocode);
+
+            // If the query returns results, display the name of the town
+            // contained in the address of the first result.
+            if (result.Status == MapLocationFinderStatus.Success)
+            {
+               geolocation.Text = "town = " +
+                    result.Locations[0].Address.Town;
+            }
+        }
+
+
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -71,6 +99,8 @@ namespace SDKTemplate
                     switch (accessStatus)
                     {
                         case GeolocationAccessStatus.Allowed:
+                            MapService.ServiceToken = "FLnByFC6agPsR0ooiEZp~wwi1VZZh24BXrHipd94OTg~Ag_LVCFXZEuLwjb8rVVO_rJaeYeLh_IzhTCrPBHUjge9--oezSW2jC_2XX_kdDMf";
+
                             _cts = new CancellationTokenSource();
                             CancellationToken token = _cts.Token;
                             // Get cancellation token
@@ -83,8 +113,14 @@ namespace SDKTemplate
                             // Carry out the operation
                             Geoposition pos = await geolocator.GetGeopositionAsync().AsTask(token);
                             rootPage.NotifyUser("Location updated.", NotifyType.StatusMessage);
-                            latitude=pos.Coordinate.Point.Position.Latitude.ToString();
-                            longitude = pos.Coordinate.Point.Position.Longitude.ToString();
+                            latitude=pos.Coordinate.Point.Position.Latitude;
+                            longitude = pos.Coordinate.Point.Position.Longitude;
+
+                           
+
+                            ReverseGeocode(latitude, longitude);
+
+
                             break;
 
                         case GeolocationAccessStatus.Denied:

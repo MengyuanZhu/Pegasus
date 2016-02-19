@@ -24,13 +24,13 @@
                         <Bold><Run Text="About"/></Bold>                        
                         
                         <LineBreak/>
-                        Developed by Binghe Wang's lab.
-                        <LineBreak/>   
+                        Developed by Mengyuan Zhu
+                        <LineBreak/> 
                         
-                        Contact: <Hyperlink NavigateUri="mailto:wang.gsu.edu">wang@gsu.edu</Hyperlink>.                        
+                        Contact: <Hyperlink NavigateUri="mailto:mzhu7@gsu.edu">mzhu7@gsu.edu</Hyperlink>.                        
                         <LineBreak/>
                         <LineBreak/>
-                        To find more apps developed in our lab, please visit this <Hyperlink NavigateUri="http://lithium.gsu.edu/Groups/Bing_Wang/default.html">website</Hyperlink>.
+                        To find more apps developed in our lab, please visit this <Hyperlink NavigateUri="https://github.com/MengyuanZhu">website</Hyperlink>.
                         <LineBreak/>
                     	<Run/>
                 </TextBlock>
