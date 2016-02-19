@@ -14,11 +14,9 @@ using Windows.Devices.Geolocation;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
-using System.Net.Http;
-using Windows.Data.Json;
 using Windows.UI.Xaml.Media;
-using Windows.Services.Maps;
-using Windows.Devices.Geolocation;
+using Windows.Services.Maps;   //geolocation
+
 namespace SDKTemplate
 {
     public sealed partial class New_Data : Page
@@ -39,7 +37,7 @@ namespace SDKTemplate
             roamingSettings = ApplicationData.Current.RoamingSettings;
         }
 
-        private async void ReverseGeocode(double latitude, double longtitude)
+        private async void ReverseGeocode(double latitude, double longtitude)//to get the city name
         {
             // Location to reverse geocode.
             BasicGeoposition location = new BasicGeoposition();
@@ -55,8 +53,7 @@ namespace SDKTemplate
             // contained in the address of the first result.
             if (result.Status == MapLocationFinderStatus.Success)
             {
-               geolocation.Text = "town = " +
-                    result.Locations[0].Address.Town;
+               geolocation.Text = "town = " +  result.Locations[0].Address.Town;
             }
         }
 
@@ -116,10 +113,7 @@ namespace SDKTemplate
                             latitude=pos.Coordinate.Point.Position.Latitude;
                             longitude = pos.Coordinate.Point.Position.Longitude;
 
-                           
-
                             ReverseGeocode(latitude, longitude);
-
 
                             break;
 
@@ -201,8 +195,7 @@ namespace SDKTemplate
 
                     }
                     else
-                        writer.WriteBytes(data);
-                    
+                        writer.WriteBytes(data);                   
                     
                     progress = "Progress: " + (Math.Round(offset / x.Length * 100, 0)).ToString() + "%";
                    
