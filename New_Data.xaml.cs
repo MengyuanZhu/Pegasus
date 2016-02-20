@@ -16,6 +16,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.UI.Xaml.Media;
 using Windows.Services.Maps;   //geolocation
+using Windows.Data.Xml.Dom;
 
 namespace SDKTemplate
 {
@@ -29,6 +30,7 @@ namespace SDKTemplate
         double latitude = 0;
         double longitude = 0;
         string time = "null";
+        
         
         public New_Data()
         {
@@ -151,8 +153,9 @@ namespace SDKTemplate
         }
         
         async private void capture_Click(object sender, RoutedEventArgs e)
-        {          
-
+        {
+            XmlDocument doc; //doc is history doc
+            string history_file_xml;
             ImageEncodingProperties imgFormat = ImageEncodingProperties.CreateJpeg();
             StorageFile file = await KnownFolders.PicturesLibrary.CreateFileAsync("Photo.jpg", CreationCollisionOption.ReplaceExisting);
             await captureManager.CapturePhotoToStorageFileAsync(imgFormat, file);
@@ -221,7 +224,43 @@ namespace SDKTemplate
             socket.Dispose();
             bt_capture.IsEnabled = true;
             rootPage.NotifyUser(Encoding.UTF8.GetString(buffer), NotifyType.StatusMessage);
+
+            history_file_xml = "result.xml";
+            StorageFile storageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(history_file_xml);
+            XmlLoadSettings loadSettings = new XmlLoadSettings();
+            loadSettings.ProhibitDtd = false;
+            loadSettings.ResolveExternals = false;
+            doc = await XmlDocument.LoadFromFileAsync(storageFile, loadSettings);
+
+            var rootnode = doc.SelectSingleNode("results");
+            IXmlNode child = doc.CreateElement("result");                    
+            rootnode.AppendChild(child);
+
+            IXmlNode xml_id = doc.CreateElement("id");
+            xml_id.InnerText = "5";
+            child.AppendChild(xml_id);
+
+            IXmlNode xml_date = doc.CreateElement("date");
+            xml_date.InnerText = "2016-2-19 4:12:12";
+            child.AppendChild(xml_date);
+
+            IXmlNode xml_location = doc.CreateElement("location");
+            xml_location.InnerText = "China";
+            child.AppendChild(xml_location);
+
+            IXmlNode xml_concentration = doc.CreateElement("concentration");
+            xml_concentration.InnerText = "168nm";
+            child.AppendChild(xml_concentration);
+
+            IXmlNode xml_model= doc.CreateElement("model");
+            xml_model.InnerText = "Fluoride Ion";
+            child.AppendChild(xml_model);
+
+            rootPage.NotifyUser(doc.GetXml(), NotifyType.StatusMessage);
             
+            //await doc.SaveToFileAsync(storageFile);
+
+
 
         }
     }

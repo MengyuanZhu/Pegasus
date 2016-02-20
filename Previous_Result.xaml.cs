@@ -47,6 +47,8 @@ namespace SDKTemplate
                 listBox.SelectedIndex = 1;
                 select_item(0);
             }
+            rootPage.NotifyUser(doc.InnerText.ToString(), NotifyType.StatusMessage);
+            
         }
         
         private void select_item(int item)  //show result of history item
