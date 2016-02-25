@@ -258,7 +258,7 @@ namespace SDKTemplate
 
             rootPage.NotifyUser(doc.GetXml(), NotifyType.StatusMessage);
             
-            //await doc.SaveToFileAsync(storageFile);
+            await doc.SaveToFileAsync(storageFile);
 
 
 
