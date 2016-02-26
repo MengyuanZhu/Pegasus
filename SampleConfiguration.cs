@@ -16,7 +16,7 @@ namespace SDKTemplate
         List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title="New Data", ClassType=typeof(New_Data)},
-            new Scenario() { Title="Pending Result", ClassType=typeof(Pending_Result)},
+            //new Scenario() { Title="Pending Result", ClassType=typeof(Pending_Result)},
             new Scenario() { Title="History Result", ClassType=typeof(Previous_Result)},
             new Scenario() { Title="Settings", ClassType=typeof(Settings)},
             new Scenario() { Title="Help & About", ClassType=typeof(Help)},
