@@ -235,13 +235,14 @@ namespace SDKTemplate
             rootPage.NotifyUser("Data generated.", NotifyType.StatusMessage);
 
 
-            history_file_xml = "result.xml";
+            history_file_xml = "history.xml";
 
             StorageFile storageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(history_file_xml);
-           
+     
+
             XmlLoadSettings loadSettings = new XmlLoadSettings();
             loadSettings.ProhibitDtd = false;
-            loadSettings.ResolveExternals = false;
+            loadSettings.ResolveExternals = false;            
             doc = await XmlDocument.LoadFromFileAsync(storageFile, loadSettings);
 
             var rootnode = doc.SelectSingleNode("results");

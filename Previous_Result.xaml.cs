@@ -27,28 +27,34 @@ namespace SDKTemplate
         {
             rootPage = MainPage.Current;
             listBox.Items.Add("Index");
+            StorageFile storageFile;
+            file = "history.xml";
+           
             
-            file = "result.xml";
-            StorageFile storageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(file);
-            XmlLoadSettings loadSettings = new XmlLoadSettings();
-            loadSettings.ProhibitDtd = false;
-            loadSettings.ResolveExternals = false;
-            doc = await XmlDocument.LoadFromFileAsync(storageFile, loadSettings);
-            var results = doc.SelectNodes("descendant::result");
-            int num_results = 1;
-            foreach (var result in results)
-            {
-                listBox.Items.Add(num_results.ToString());
-                num_results += 1;
-            }
+                storageFile= await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(file);
+                XmlLoadSettings loadSettings = new XmlLoadSettings();
+                loadSettings.ProhibitDtd = false;
+                loadSettings.ResolveExternals = false;
+                doc = await XmlDocument.LoadFromFileAsync(storageFile, loadSettings);
+                var results = doc.SelectNodes("descendant::result");
+                int num_results = 1;
+                foreach (var result in results)
+                {
+                    listBox.Items.Add(num_results.ToString());
+                    num_results += 1;
+                }
 
-            if (num_results > 1) //show the first history result
-            {
-                listBox.SelectedIndex = 1;
-                select_item(0);
-            }
-            rootPage.NotifyUser(doc.InnerText.ToString(), NotifyType.StatusMessage);
+                if (num_results > 1) //show the first history result
+                {
+                    listBox.SelectedIndex = 1;
+                    select_item(0);
+                }
             
+          
+
+
+            //rootPage.NotifyUser(doc.InnerText.ToString(), NotifyType.StatusMessage);
+
         }
         
         private void select_item(int item)  //show result of history item

@@ -179,7 +179,7 @@
     <Content Include="Assets\StoreLogo-sdk.scale-100.png" />
     <Content Include="Assets\StoreLogo-sdk.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="result.xml" />
+    <Content Include="history.xml" />
     <Content Include="status.xml" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Assets\StoreLogo-sdk.scale-200.png" />
