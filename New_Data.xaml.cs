@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using Windows.UI.Xaml.Media;
-using Windows.Services.Maps;   //geolocation
+using Windows.Services.Maps;   //city name
 using Windows.Data.Xml.Dom;
 
 namespace SDKTemplate
@@ -30,8 +30,10 @@ namespace SDKTemplate
         double latitude = 0;
         double longitude = 0;
         string time = "null";
-        
-        
+        string cityname="null";
+        string concentration="null";
+
+
         public New_Data()
         {
             this.InitializeComponent();
@@ -55,7 +57,7 @@ namespace SDKTemplate
             // contained in the address of the first result.
             if (result.Status == MapLocationFinderStatus.Success)
             {
-               geolocation.Text = "town = " +  result.Locations[0].Address.Town;
+               cityname=  result.Locations[0].Address.Town;
             }
         }
 
@@ -88,8 +90,7 @@ namespace SDKTemplate
                 {
                     _cts.Cancel();
                     _cts = null;
-                }
-                               
+                }                               
                 try
                 {
                     // Request permission to access location
@@ -114,7 +115,6 @@ namespace SDKTemplate
                             rootPage.NotifyUser("Location updated.", NotifyType.StatusMessage);
                             latitude=pos.Coordinate.Point.Position.Latitude;
                             longitude = pos.Coordinate.Point.Position.Longitude;
-
                             ReverseGeocode(latitude, longitude);
 
                             break;
@@ -125,7 +125,6 @@ namespace SDKTemplate
 
                         case GeolocationAccessStatus.Unspecified:
                             rootPage.NotifyUser("Unspecified error.", NotifyType.ErrorMessage);
-
                             break;
                     }
                 }
@@ -220,13 +219,26 @@ namespace SDKTemplate
             rootPage.NotifyUser("Uploading finished.", NotifyType.StatusMessage);
 
             byte[] buffer = new byte[128];
-            await socket.InputStream.ReadAsync(buffer.AsBuffer(), 128,InputStreamOptions.ReadAhead);
+
+            Stream results=socket.InputStream.AsStreamForRead();
+            var memoryStream = new MemoryStream();
+            results.CopyTo(memoryStream);
+            buffer = memoryStream.ToArray();
+            //await socket.InputStream.ReadAsync(buffer.AsBuffer(), 128,InputStreamOptions.ReadAhead);
+
             socket.Dispose();
+            
+
             bt_capture.IsEnabled = true;
-            rootPage.NotifyUser(Encoding.UTF8.GetString(buffer), NotifyType.StatusMessage);
+            concentration = Encoding.UTF8.GetString(buffer)+" nm"; //get concentration result
+            geolocation.Text = concentration;
+            rootPage.NotifyUser("Data generated.", NotifyType.StatusMessage);
+
 
             history_file_xml = "result.xml";
+
             StorageFile storageFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(history_file_xml);
+           
             XmlLoadSettings loadSettings = new XmlLoadSettings();
             loadSettings.ProhibitDtd = false;
             loadSettings.ResolveExternals = false;
@@ -245,23 +257,21 @@ namespace SDKTemplate
             child.AppendChild(xml_date);
 
             IXmlNode xml_location = doc.CreateElement("location");
-            xml_location.InnerText = "China";
+            xml_location.InnerText = cityname;
             child.AppendChild(xml_location);
 
-            IXmlNode xml_concentration = doc.CreateElement("concentration");
-            xml_concentration.InnerText = "168nm";
+            IXmlNode xml_concentration = doc.CreateElement("concentration");            
+            xml_concentration.InnerText = geolocation.Text;            
             child.AppendChild(xml_concentration);
 
             IXmlNode xml_model= doc.CreateElement("model");
             xml_model.InnerText = "Fluoride Ion";
             child.AppendChild(xml_model);
 
-            rootPage.NotifyUser(doc.GetXml(), NotifyType.StatusMessage);
+            //rootPage.NotifyUser(doc.GetXml(), NotifyType.StatusMessage);
             
             await doc.SaveToFileAsync(storageFile);
-
-
-
+            
         }
     }
 }
